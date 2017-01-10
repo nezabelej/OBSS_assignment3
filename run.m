@@ -12,7 +12,7 @@ figure(1); clf;
 imshow(I);
 colormap gray;
 figure(2); clf;
-imshow(F)
+imshow(F);
 colormap gray;
 final = marrHildreth(F,0); % Finds the zero crossings of F to determine the locations of edges in I
 figure(3); clf;
