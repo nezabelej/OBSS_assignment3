@@ -1,17 +1,23 @@
-OBSS - SEMINAR 3
+Neža Belej
+(63120340)
 
-Detecting contours of human organs in CT images using the Marr-Hildreth edge detector
+BSIP, assignment3: Detecting contours of human organs in CT images using the Marr-Hildreth edge detector
 
-Our task was to detect contours of human organs in the CT images from the CTMRI DB
-using Marr-Hildreth edge detector.
+Our task was to write a program for detecting contours of human organs in the CT images from the CTMRI DB using the Marr-Hildreth edge detector. 
 
-The program first determines the size of the LoG operator and then calculates coefficients of the
-LoG operator. The program then applies this mask to the image to enhance edges. The edges are then obtained by searching for zero crossings.
+Steps:
+1. Accept a .png file which represents a CT image.
+2. Calculate sigma.
+3. Calculate coefficients of the LoG operator (mask).
+4. Apply this mask on the image to enhance edges.
+5. Searching for zero crossings and perform binarization.
+6. The output is the binarized image.
+7. The program displays the original image, the binarized image and the final image after edge linking. 
 
-Zero crossings are the key feature of the Marr-Hildreth edge detection method.  We used the following approach:
+Zero crossings are the key feature of the Marr-Hildreth edge detection method. The Marr-Hildreth algorithm was implemented with the following approach:
 
 - We used a 3 x 3 neighborhood centered at p,
 - the signs of at least two of opposing neighboring pixels of a pixel p considered must differ.
 - the neighboring pixels absolute difference must be less then threshold T
 
-Results shows, that edge detector successfully detects edges, but a lot is dependent on the parameters we use.
+Results shows that edge detector successfully detects edges.
