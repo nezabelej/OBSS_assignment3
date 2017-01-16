@@ -1,10 +1,10 @@
 Neža Belej
 (63120340)
 
-BSIP, assignment3: Detecting contours of human organs in CT images using the Marr-Hildreth edge detector
 
-Our task was to write a program for detecting contours of human organs in the CT images from the CTMRI DB using the Marr-Hildreth edge detector. 
 
+--Methods
+We used Marr-Hildreth algorithm for detecting edges. 
 Steps:
 1. Accept a .png file which represents a CT image.
 2. Calculate sigma.
@@ -14,10 +14,15 @@ Steps:
 6. The output is the binarized image.
 7. The program displays the original image, the binarized image and the final image after edge linking. 
 
-Zero crossings are the key feature of the Marr-Hildreth edge detection method. The Marr-Hildreth algorithm was implemented with the following approach:
 
-- We used a 3 x 3 neighborhood centered at p,
-- the signs of at least two of opposing neighboring pixels of a pixel p considered must differ.
-- the neighboring pixels absolute difference must be less then threshold T
+->možne izboljšave (vsaj testiraj)
+->edge je samo zunanji rob (debelina)
+->parametri (threshold) ... -> adaptive
+->več slik
 
-Results shows that edge detector successfully detects edges.
+Introduction --> na kateri bazi
+->fspecial ('gauss', 3, 0.5) ali calcGauss
+
+calcLog ---> če je sigma majhna, nima efekta; če je večja, pa postane to nek odvod neposredni LoG
+
+threshold & sigma
