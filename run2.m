@@ -1,51 +1,44 @@
-clear all
-im=imread('0099.png');
-im=im2double(im);
-%smoothening the image with a filter
+I = imread('./images/0099.png');
+I = im2double(I);
+
+% sigma=0.5% of min. image size dimension in pixels.
+sigma = min(size(I))*0.01;
+
+% Calculate coefficients of the LoG filter. Result is the mask.
+M = calcLog(sigma);
+
+% Applying mask on the image.
+% filter2: Filters the data in I with the two-dimensional FIR filter in the matrix M. Result is the same size as I.
+F = conv2(I, M);
+
+%%% Try also with simple filter.
 gfilter= [0 0 1 0 0;
-       0 1 2 1 0;
-       1 2 -16 2 1;
-       0 1 2 1 0;
-       0 0 1 0 0];
-   
-smim=conv2(im,gfilter);
+          0 1 2 1 0;
+          1 2 -16 2 1;
+          0 1 2 1 0;
+          0 0 1 0 0];
+F2 = conv2(I, gfilter);
+%%%
 
+% Finds the zero crossings of F to determine the locations of edges in I
+final = marrHildreth(F2, 2);
+final = im2uint8(final);
+imwrite(final, 'out3.png');
 
-% finding the zero crossings
+figure(1); clf;
+imshow(I);
+colormap gray;
+figure(2); clf;
+imshow(F);
+colormap gray;
+figure(3); clf;
+imagesc(final);
+colormap gray;
 
-[rr,cc]=size(smim);
-zc=zeros([rr,cc]);
+%Built-in function:
+I2 = edge(I,'log');
+figure(4); clf;
+imagesc(I2);
+imwrite(I2, 'out4.png');
 
-for i=2:rr-1
-    for j=2:cc-1
-        if (smim(i,j)>0)
-             if (smim(i,j+1)>=0 && smim(i,j-1)<0) || (smim(i,j+1)<0 && smim(i,j-1)>=0)
-                             
-                zc(i,j)= smim(i,j+1);
-                        
-            elseif (smim(i+1,j)>=0 && smim(i-1,j)<0) || (smim(i+1,j)<0 && smim(i-1,j)>=0)
-                    zc(i,j)= smim(i,j+1);
-            elseif (smim(i+1,j+1)>=0 && smim(i-1,j-1)<0) || (smim(i+1,j+1)<0 && smim(i-1,j-1)>=0)
-                  zc(i,j)= smim(i,j+1);
-            elseif (smim(i-1,j+1)>=0 && smim(i+1,j-1)<0) || (smim(i-1,j+1)<0 && smim(i+1,j-1)>=0)
-                  zc(i,j)=smim(i,j+1);
-            end
-                        
-        end
-            
-    end
-end
-
-
-otpt=im2uint8(zc);
-% thresholding
-otptth= otpt>105;
-
-figure;
-  subplot(2,2,1);imshow(im);title('Origional image');
-  subplot(2,2,2);imshow(smim);title('Smoothened image');
-  subplot(2,2,3);imshow(otpt);title('Output image');
-  subplot(2,2,4);imshow(otptth);title('Output image with threshold');
-
-  % final result
-   figure, imshow(otptth);
+%colormap gray;
