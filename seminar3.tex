@@ -30,13 +30,13 @@ We used Marr-Hildreth edge detection algorithm. The steps are following:
 
 Zero crossings are the key feature of the Marr-Hildreth edge detection method. For every pixel p:
 \begin{itemize}
-\item{we used a 3 x 3 neighborhood centered at p,}
+\item{we use a 3 x 3 neighborhood centered at p,}
 \item{ the signs of at least two of opposing neighboring pixels of a pixel p considered must differ (there are four cases: left/right, up/down, and the two diagonals),}
 \item{ the absolute value of their numerical differences must exceed the threshold T.}
 \end{itemize}
 
 \section{Results}
-We tested our algorithm on the CT images of CTMRI database. Results shows that edge detector successfully detects edges. It finds the correct places of edges, but the edges are not always thin and they are too spotty.\\
+We tested our algorithm on the CT images of CTMRI database. Results show that edge detector successfully detects edges. It finds the correct places of edges, but the edges are not always thin and they are too spotty.\\
 Our input images are in the folder /input/. We tested our images with 2 different masks: one is dynamic, obtained from image size properties; the second mask is smaller and static. We stored output images, obtained with first mask, in folder /output/; the second is in /output2/. We see from results how much effect has the filter on the output image.
 We also tested the effect of the threshold, used in zero crossing.
 Example:

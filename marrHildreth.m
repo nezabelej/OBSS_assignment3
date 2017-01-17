@@ -7,8 +7,6 @@ function If = marrHildreth(I, thresh)
            patch = I(i-1:i+1,j-1:j+1);
            n = 0;
            % L <-> R
-           % 1.part (signs) just tells us where the edge is
-           % In that case, you lose some of the information
            if sign(patch(2,1))*sign(patch(2,3)) < 0 && abs(patch(2,1)-patch(2,3)) >= thresh
                n = n + 1;
            end

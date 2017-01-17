@@ -1,3 +1,5 @@
+%VERSION FOR PROCESSING ONLY 1 IMAGE
+
 I = imread('./images/0099.png');
 I = im2double(I);
 
@@ -23,7 +25,6 @@ F2 = conv2(I, gfilter);
 % Finds the zero crossings of F to determine the locations of edges in I
 final = marrHildreth(F2, 2);
 final = im2uint8(final);
-imwrite(final, 'out3.png');
 
 figure(1); clf;
 imshow(I);
@@ -39,6 +40,4 @@ colormap gray;
 I2 = edge(I,'log');
 figure(4); clf;
 imagesc(I2);
-imwrite(I2, 'out4.png');
-
-%colormap gray;
+colormap gray;
